@@ -11,14 +11,22 @@ dotenv.config();
 const  app = express();
 // middleware for JSON parse
 app.use(express.json()); 
-// Middleware for CORS
-const corsOptions = {
-    origin: 'https://passwordrestft.netlify.app', // Replace with your frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
+// Custom CORS Middleware
+const corsMiddleware = (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://passwordrestft.netlify.app');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+
+    next();
 };
-app.use(cors(corsOptions));
+
+app.use(corsMiddleware);
 
 //Connect to  mongoDB
 mongoose.connect(process.env.MONGO_URI)
