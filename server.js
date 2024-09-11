@@ -10,14 +10,7 @@ dotenv.config();
 // initiating exoress
 const  app = express();
 // middleware for JSON parse
-app.use(express.json());
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://passwordrestft.netlify.app'); // Allow only this origin
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-  });  
+app.use(express.json()); 
 
 //Connect to  mongoDB
 mongoose.connect(process.env.MONGO_URI)
