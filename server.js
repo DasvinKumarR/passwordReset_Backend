@@ -11,9 +11,11 @@ dotenv.config();
 const  app = express();
 // middleware for JSON parse
 app.use(express.json()); 
-// middleware for cross browser handling
+// Middleware for CORS
 app.use(cors({
-    origin:"*",
+    origin: 'https://passwordrestft.netlify.app', // Allow only this origin
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type,Authorization'
 }));
 
 //Connect to  mongoDB
