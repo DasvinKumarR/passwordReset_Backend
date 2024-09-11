@@ -11,12 +11,13 @@ dotenv.config();
 const  app = express();
 // middleware for JSON parse
 app.use(express.json());
-// middleware for cross browser actions
-app.use(cors({
-    origin:'https://passwordrestft.netlify.app',
-    methods:'GET, POST, PUT, DELETE',
-    allowedHeaders: 'Content-Type,Authorization'
-}));
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://passwordrestft.netlify.app'); // Allow only this origin
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });  
 
 //Connect to  mongoDB
 mongoose.connect(process.env.MONGO_URI)
