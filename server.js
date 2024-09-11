@@ -11,14 +11,8 @@ dotenv.config();
 const  app = express();
 // middleware for JSON parse
 app.use(express.json());
-// middleware to  allow cross browsing
-const corsOptions = {
-    origin: 'https://passwordrestft.netlify.app', // Replace with your frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-  };
-app.use(cors(corsOptions));
+// middleware for cross browser actions
+app.use(cors());
 
 //Connect to  mongoDB
 mongoose.connect(process.env.MONGO_URI)
