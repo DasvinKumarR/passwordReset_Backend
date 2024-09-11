@@ -11,6 +11,10 @@ dotenv.config();
 const  app = express();
 // middleware for JSON parse
 app.use(express.json()); 
+// middleware for cross browser handling
+app.use(cors({
+    origin:"*",
+}));
 
 //Connect to  mongoDB
 mongoose.connect(process.env.MONGO_URI)
