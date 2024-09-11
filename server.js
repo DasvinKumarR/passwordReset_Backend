@@ -13,12 +13,13 @@ const  app = express();
 app.use(express.json());
 // middleware to  allow cross browsing
 const corsOptions = {
-    origin: 'https://passwordrestft.netlify.app', // Replace with your frontend URL
+    origin: 'https://passwordrestft.netlify.app/', // Replace with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
   };
 app.use(cors(corsOptions));
+app.options("*",cors(corsOptions));
 
 //Connect to  mongoDB
 mongoose.connect(process.env.MONGO_URI)
