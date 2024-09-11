@@ -12,7 +12,11 @@ const  app = express();
 // middleware for JSON parse
 app.use(express.json());
 // middleware for cross browser actions
-app.use(cors());
+app.use(cors({
+    origin:'https://passwordrestft.netlify.app',
+    methods:'GET, POST, PUT, DELETE',
+    allowedHeaders: 'Content-Type,Authorization'
+}));
 
 //Connect to  mongoDB
 mongoose.connect(process.env.MONGO_URI)
